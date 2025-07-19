@@ -1,0 +1,129 @@
+/* Reset & Base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+nav {
+  background: #0a66c2;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav .logo { font-size: 1.5rem; font-weight: bold; }
+nav ul { list-style: none; display: flex; gap: 1rem; }
+nav ul li a {
+  color: white; text-decoration: none; font-weight: 500;
+}
+nav ul li a.active,
+nav ul li a:hover { text-decoration: underline; }
+
+/* Layout */
+.container {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: white;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+}
+.sidebar h2 { margin-bottom: 1rem; color: #0a66c2; }
+.chat-list { list-style: none; }
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.chat-item img {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+.chat-item span { font-size: 0.95rem; color: #333; }
+.chat-item.active,
+.chat-item:hover { background: #e1f0ff; }
+
+/* Chat Window */
+.chat-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+.chat-header img {
+  width: 40px; height: 40px; border-radius: 50%;
+  margin-right: 0.75rem;
+}
+.chat-header h3 { font-size: 1.1rem; color: #0a66c2; }
+
+/* Messages */
+.messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+.message {
+  max-width: 70%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  position: relative;
+}
+.message.received {
+  background: #e1f0ff;
+  align-self: flex-start;
+}
+.message.sent {
+  background: #0a66c2;
+  color: white;
+  align-self: flex-end;
+}
+.message .time {
+  display: block;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  color: #555;
+  text-align: right;
+}
+
+/* Input Box */
+.message-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+.message-input input {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  font-size: 1rem;
+}
+.message-input button {
+  background: #0a66c2;
+  color: white;
+  border: none;
+  padding: 0 1.5rem;
+  cursor: pointer;
+}
+.message-input button:hover {
+  background: #004182;
+}

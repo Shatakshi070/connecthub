@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Messages | ConnectHub</title>
+  <link rel="stylesheet" href="message.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">ConnectHub</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="messages.html" class="active">Messages</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <!-- Sidebar: Conversations -->
+    <aside class="sidebar">
+      <h2>Chats</h2>
+      <ul class="chat-list">
+        <li class="chat-item active">
+          <img src="https://i.pravatar.cc/40?img=1" alt="Amit">
+          <span>Amit Sharma</span>
+        </li>
+        <li class="chat-item">
+          <img src="https://i.pravatar.cc/40?img=2" alt="Priya">
+          <span>Priya Desai</span>
+        </li>
+        <li class="chat-item">
+          <img src="https://i.pravatar.cc/40?img=3" alt="Rohit">
+          <span>Rohit Verma</span>
+        </li>
+        <!-- Add more chat items here -->
+      </ul>
+    </aside>
+
+    <!-- Main chat area -->
+    <section class="chat-window">
+      <div class="chat-header">
+        <img src="https://i.pravatar.cc/40?img=1" alt="Amit">
+        <h3>Amit Sharma</h3>
+      </div>
+
+      <div class="messages">
+        <div class="message received">
+          <p>Hi there! How’s your project going?</p>
+          <span class="time">10:02 AM</span>
+        </div>
+        <div class="message sent">
+          <p>Hey! It’s coming along well. I just finished the UI.</p>
+          <span class="time">10:05 AM</span>
+        </div>
+        <div class="message received">
+          <p>That’s great! Want to review together later?</p>
+          <span class="time">10:06 AM</span>
+        </div>
+        <!-- More messages -->
+      </div>
+
+      <form class="message-input">
+        <input type="text" placeholder="Type your message..." required />
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </div>
+</body>
+<script>
+  const messageForm = document.querySelector(".message-input");
+  const messageInput = messageForm.querySelector("input");
+  const messagesContainer = document.querySelector(".messages");
+
+  messageForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const text = messageInput.value.trim();
+    if (!text) return;
+
+    // Create the message element
+    const msgDiv = document.createElement("div");
+    msgDiv.classList.add("message", "sent");
+    msgDiv.innerHTML = `<p>${text}</p><span class="time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+
+    messagesContainer.appendChild(msgDiv);
+    messageInput.value = "";
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  });
+</script>
+
+</html>

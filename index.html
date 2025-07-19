@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ConnectHub | Home</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">ConnectHub</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="profile.html">My Profile</a></li>
+        <li><a href="message.html">Messages</a></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container">
+    <section class="intro">
+      <h1>Welcome to ConnectHub</h1>
+      <p>Build your professional network, connect with experts, and grow your career.</p>
+    </section>
+
+    <section class="suggestions">
+      <h2>Suggested Connections</h2>
+      <div class="card-grid">
+
+        <!-- User 1 -->
+        <div class="card">
+          <img src="https://i.pravatar.cc/150?img=5" alt="Aarav Malhotra profile image">
+          <h3>Aarav Malhotra</h3>
+          <p>Software Developer</p>
+          <button class="connect-btn" data-userid="user_aarav">Connect</button>
+        </div>
+
+        <!-- User 2 -->
+        <div class="card">
+          <img src="https://i.pravatar.cc/150?img=15" alt="Rooo profile image">
+          <h3>Rooo</h3>
+          <p>UI/UX Designer</p>
+          <button class="connect-btn" data-userid="user_roo">Connect</button>
+        </div>
+
+        <!-- User 3 -->
+        <div class="card">
+          <img src="https://i.pravatar.cc/150?img=23" alt="Karan Mehta profile image">
+          <h3>Karan Mehta</h3>
+          <p>Marketing Expert</p>
+          <button class="connect-btn" data-userid="user_karan">Connect</button>
+        </div>
+
+        <!-- User 4 -->
+        <div class="card">
+          <img src="https://i.pravatar.cc/150?img=32" alt="Sneha Iyer profile image">
+          <h3>Sneha Iyer</h3>
+          <p>Data Analyst</p>
+          <button class="connect-btn" data-userid="user_iyer">Connect</button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    const buttons = document.querySelectorAll('.connect-btn');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetUserId = btn.dataset.userid;
+
+        const connectionRequest = {
+          from: 'user_current', // Replace with actual logged-in user
+          to: targetUserId
+        };
+
+        fetch('/api/connect', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(connectionRequest)
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            btn.textContent = 'Requested';
+            btn.disabled = true;
+            btn.style.backgroundColor = '#888';
+          }
+        })
+        .catch(err => console.error('Connection Error:', err));
+      });
+    });
+  </script>
+
+</body>
+</html>
