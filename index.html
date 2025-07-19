@@ -17,6 +17,8 @@
         <li><a href="profile.html">My Profile</a></li>
         <li><a href="message.html">Messages</a></li>
         <li><a href="login.html">Logout</a></li>
+         <li class="icon-btn" id="notif-bell">🔔</li>
+      <li class="icon-btn" id="msg-icon">💬</li>
       </ul>
     </div>
   </nav>
@@ -67,7 +69,14 @@
       </div>
     </section>
   </main>
-
+<div class="popup-panel" id="notif-panel">
+  <h4>Notifications</h4>
+  <ul id="notif-list"></ul>
+</div>
+<div class="popup-panel" id="msg-panel">
+  <h4>Messages</h4>
+  <ul id="msg-list"></ul>
+</div>
   <!-- JavaScript -->
   <script>
     const buttons = document.querySelectorAll('.connect-btn');
@@ -97,7 +106,63 @@
         .catch(err => console.error('Connection Error:', err));
       });
     });
-  </script>
+  const notifications = [
+    { id: 1, user: "Aarav Malhotra", action: "sent you a connection request" },
+    { id: 2, user: "Sneha Iyer", action: "accepted your connection" },
+  ];
 
+  const messages = [
+    { from: "Rooo", preview: "Hey, let's collaborate on UI ideas!" },
+    { from: "Karan Mehta", preview: "I liked your recent post!" }
+  ];
+
+  const notifPanel = document.getElementById('notif-panel');
+  const msgPanel = document.getElementById('msg-panel');
+
+  const notifList = document.getElementById('notif-list');
+  const msgList = document.getElementById('msg-list');
+
+  document.getElementById('notif-bell').addEventListener('click', () => {
+    notifPanel.classList.toggle('visible');
+    msgPanel.classList.remove('visible');
+  });
+
+  document.getElementById('msg-icon').addEventListener('click', () => {
+    msgPanel.classList.toggle('visible');
+    notifPanel.classList.remove('visible');
+  });
+
+  notifications.forEach(n => {
+    const li = document.createElement('li');
+    li.textContent = `${n.user} ${n.action}`;
+    notifList.appendChild(li);
+  });
+
+  messages.forEach(m => {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${m.from}:</strong> ${m.preview}`;
+    msgList.appendChild(li);
+  });
+
+  // Optional: close on outside click
+  window.addEventListener('click', e => {
+    if (!e.target.closest('.icon-btn') && !e.target.closest('.popup-panel')) {
+      notifPanel.classList.remove('visible');
+      msgPanel.classList.remove('visible');
+    }
+  });
+ 
+</script>
+
+<div class="popup-panel" id="notif-panel">
+  <h4>Notifications</h4>
+  <ul id="notif-list"></ul>
+</div>
+
+<!-- Messages Panel -->
+<div class="popup-panel" id="msg-panel">
+  <h4>Messages</h4>
+  <ul id="msg-list"></ul>
+</div>
 </body>
 </html>
